@@ -19,7 +19,7 @@ class RRT3D(Graph):
 				 expand_dis=3.0,
 				 path_resolution=0.5,
 				 goal_sample_rate=5,
-				 max_iter=500):
+				 max_iter=1000):
         """
         start: Start Position [x,y,z]
         goal: Goal Position [x,y,z]
@@ -37,7 +37,7 @@ class RRT3D(Graph):
         self.depth = depth
 
 
-    def planning(self, animation=True):
+    def planning(self, axis_plot, animation=True):
         """
         rrt path planning
 
@@ -55,20 +55,21 @@ class RRT3D(Graph):
                 self.addPos(new_node)
                 self.setAdjacent(nearest_ind, len(self.v)-1)
 
-            if animation and i % 5 == 0:
-                pass
-                #self.draw_graph(rnd_node)
+                if animation:
+                    print("plotting")
+                    axis_plot.plot(*zip(nearest_node,new_node), color=c_edge)
 
             if self.distance(self.v[-1],self.goal) <= self.expand_dis:
                 final_node = self.steer(self.v[-1], self.goal,
                                         self.expand_dis)
                 if not self.obstacles.collides(final_node):
-                    return self.generate_final_course(len(self.v) - 1)
+                    pass
+                    #return self.generate_final_course(len(self.v) - 1)
 
             if animation and i % 5:
                 pass
                 #self.draw_graph(rnd_node)
-
+        self.generate_final_course(len(self.v) - 1)
         return None  # cannot find path
 
 

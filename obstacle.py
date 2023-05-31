@@ -13,7 +13,7 @@ class Obstacle(Polygon):
 	def collides(self, v):
 		if self.type == self.TYPE_CIRCULAR:
 			for i in range(len(self.v)):
-				if (self.distance(self.v[i], v) < self.radii[i]):
+				if (self.distance(self.v[i], v) < self.radii[i] and abs(self.v[i][2] - v[2]) < 0.1):
 					return True
 			return False
 		elif self.type == self.TYPE_POLY:

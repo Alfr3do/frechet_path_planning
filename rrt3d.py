@@ -37,7 +37,7 @@ class RRT3D(Graph):
         self.depth = depth
 
 
-    def planning(self, animation=True):
+    def planning(self, axis_plot, animation=True):
         """
         rrt path planning
 
@@ -55,19 +55,14 @@ class RRT3D(Graph):
                 self.addPos(new_node)
                 self.setAdjacent(nearest_ind, len(self.v)-1)
 
-            if animation and i % 5 == 0:
-                pass
-                #self.draw_graph(rnd_node)
 
             if self.distance(self.v[-1],self.goal) <= self.expand_dis:
                 final_node = self.steer(self.v[-1], self.goal,
                                         self.expand_dis)
                 if not self.obstacles.collides(final_node):
-                    return self.generate_final_course(len(self.v) - 1)
+                    pass
+                    #return self.generate_final_course(len(self.v) - 1)
 
-            if animation and i % 5:
-                pass
-                #self.draw_graph(rnd_node)
 
         return None  # cannot find path
 

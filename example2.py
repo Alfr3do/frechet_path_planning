@@ -30,8 +30,9 @@ def main():
 			start= start1, 
 			goal= goal1,
 			obstacles=O, 
-			expand_dis=10.0,
-			rand_area=[-50,200]
+			expand_dis=50.0,
+			rand_area=[-50,200],
+			max_iter=100
 		)
 
 	start2 = [0,0,60]
@@ -40,13 +41,29 @@ def main():
 			start= start2, 
 			goal= goal2,
 			obstacles=O, 
-			expand_dis=10.0,
+			expand_dis=50.0,
 			rand_area=[-50,200],
-			depth=60
+			depth=60,
+			max_iter=100
 		)
 
-	path = rrt.planning(animation=True)
-	path2 =  rrt2.planning(animation=True)
+	start3 = [0,0,-20]
+	goal3 = [100,180,-20]
+
+	rrt3 = RRT3D(
+			start= start3, 
+			goal= goal3,
+			obstacles=O, 
+			expand_dis=50.0,
+			rand_area=[-50,200],
+			depth=-20,
+			max_iter=100
+		)
+
+	path = rrt.planning(ax, animation=True)
+	path2 =  rrt2.planning(ax, animation=True)
+	path3 =  rrt3.planning(ax, animation=True)
+
 	if path is None:
 		print("Cannot find path")
 	else:
@@ -59,6 +76,7 @@ def main():
 	ax.scatter(*goal2,marker="x", color="r")
 	rrt.draw(ax)
 	rrt2.draw(ax)
+	rrt3.draw(ax)
 	plt.show()
 
 
