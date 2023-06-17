@@ -29,6 +29,7 @@ class PRM3D(Graph):
         start: Start Position [x,y,z]
         goal: Goal Position [x,y,z]
         """
+		random.seed(10)
 		Graph.__init__(self)
 		self.addPos(start)
 		self.goal = goal
@@ -45,7 +46,6 @@ class PRM3D(Graph):
 		prm path planning
 		animation: flag for animation on or off
 		"""
-
 		# getting samples
 		while len(self.v) < self.n_samples:
 			tx = random.uniform(self.min_rand, self.max_rand)
@@ -53,6 +53,9 @@ class PRM3D(Graph):
 			if not self.obstacles.collides((tx,ty,self.depth)):
 				self.addPos((tx,ty,self.depth))
 		self.tree = cKDTree(self.v)
+
+		self.addPos(self.goal)
+
 
 		for vertex in range(len(self.v)):
 			dists, indexes = self.tree.query(self.v[vertex], k = self.n_near_conn)

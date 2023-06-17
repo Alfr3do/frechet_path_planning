@@ -31,7 +31,7 @@ def main():
 			goal= goal1,
 			obstacles=O, 
 			rand_area=[-50,200],
-			n_samples = 80,
+			n_samples = 480,
 			n_near_conn = 3,
 			max_dist_conn = 300
 		)
@@ -46,7 +46,7 @@ def main():
 			goal= goal2,
 			obstacles=O, 
 			rand_area=[-50,200],
-			n_samples = 80,
+			n_samples = 480,
 			n_near_conn = 3,
 			depth = 60,
 			max_dist_conn = 300

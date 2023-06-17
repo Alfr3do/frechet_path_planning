@@ -24,26 +24,33 @@ class Polygon:
 					closer = i
 		return closer
 
-	def distance(self, vertex1, vertex2):
+	@staticmethod
+	def distance(vertex1, vertex2):
 		return np.linalg.norm(np.array(vertex1) - np.array(vertex2))
 
 	def distanceBetween(self, vertex_ind1, vertex_ind2):
 		if (len(self.v) < vertex_ind1 or len(self.v) < vertex_ind2 or self.v[vertex_ind1][0] == np.inf or self.v[vertex_ind2][0] == np.inf):
 			return np.inf
-		return self.distance(self.v[vertex_ind1], self.v[vertex_ind2])
+		return Graph.distance(self.v[vertex_ind1], self.v[vertex_ind2])
 
 	def setVerticesPos(self,vertices): 
 		# receives a list of verteces positions   
 		self.v = vertices;
 
-	def addVertexXYZ(self,x,y,z,vertex): 
-		self.v.append([x,y,z]);
-
+	#TODO: rename to getVertexAtPosition
 	def getPos(self, vertex):
 		return self.v[vertex] if vertex<len(self.v) else np.empty((1,2))*np.nan	
 
+	'''
+		Adds a vertex, and its position
+	'''
+	#TODO: rename to addVertex
 	def addPos(self,v):
-		self.v.append(np.array(v));
+		#self.v.append(np.array(v));
+		self.v.append(v);
+
+
+
 	def setPos(self,v,vertex): 
 		if len(self.v) > vertex:
 			self.v[vertex] = v;
